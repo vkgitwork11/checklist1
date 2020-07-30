@@ -70,6 +70,24 @@ body{
   pointer-events: none;
 }
 
+.btn-primary{
+	background-color: rgb(64, 93, 135);
+	border-color:rgb(53, 46, 130);
+
+}
+.form-control:focus{
+	border-color:rgb(37, 103, 118);
+	box-shadow: none;
+}
+
+.note-body{
+  text-align: left;
+}
+
+
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -33,6 +33,34 @@ class App extends Component {
     }
     
   }
+
+  handleNoteInputChange = (e)=>{
+    this.setState({noteInputValue:e.target.value})
+  }
+  handleAddButtonClick = (e)=>{
+    e.preventDefault()
+    var note = {
+      id:Date.now(),
+      text:this.state.noteInputValue
+    }
+    var newNotes = [note, ...this.state.notes]
+
+    this.setState({
+      notes:newNotes,
+      noteInputValue : ''
+    })
+  }
+  handleNoteDelete = (e)=>{
+    var noteIdToDelete = parseInt(e.target.id)
+    var notes = this.state.notes
+
+    var filteredNotes = notes.filter((item)=>{
+      return item.id != noteIdToDelete
+    })
+
+    this.setState({notes:filteredNotes})
+  }
+
   render(){
     return (
      
@@ -47,7 +75,7 @@ class App extends Component {
 
                     <div class="note">
                         <div class="note-body">
-                            <i class="fa fa-times note-remove" aria-hidden="remove"></i>
+                            <i id={note.id} className="fa fa-times note-remove" aria-hidden="remove" onClick={this.handleNoteDelete}></i>
                             <i class="fa fa-plus note-plus" aria-hidden="plus"></i>
                             <div class="note-text">
                                 {note.text}
@@ -68,10 +96,10 @@ class App extends Component {
 					<form class="note-body">
 					  	<div class="form-group">
 					    	<label for="note-input">New note</label>
-					    	<input type="text" class="form-control" id="note-input"/>
+					    	<input type="text" class="form-control" id="note-input" value={this.state.noteInputValue} onChange={this.handleNoteInputChange}/>
 					  	</div>
 				
-					  	<button type="submit" class="btn btn-primary">Add</button>
+					  	<button type="submit" class="btn btn-primary" onClick={this.handleAddButtonClick}>Add</button>
 					</form>
 					
 			</div>
